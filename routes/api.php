@@ -20,9 +20,10 @@ use App\Http\Controllers\AuthController;
 });*/
 
 Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/register', [AuthController::class, 'register']);
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'apiJwt',
     'prefix' => 'auth'
 
 ], function ($router) {
@@ -30,7 +31,7 @@ Route::group([
         return view('welcome');
     });
     //Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
+    //Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);

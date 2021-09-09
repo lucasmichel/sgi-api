@@ -94,7 +94,6 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout() {
-        dd(auth()->user());
         auth()->logout();
 
         return response()->json(['message' => 'User successfully signed out']);
