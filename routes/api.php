@@ -31,6 +31,27 @@ Route::group([
     Route::get('/', function () {
         return view('welcome');
     });
+
+
+    Route::group([
+        'middleware' => ['user_super_admin']
+    ], function () {
+
+        Route::apiResource('/tenants', 'TenantController')->except(['store', 'update'])->names([
+            'index'     => 'tenants.index',
+            'show'      => 'tenants.show',
+            'destroy'   => 'tenants.destroy'
+        ]);
+        Route::apiResource('/modules', 'ModuleController')->names([
+            'index'     => 'modules.index',
+            'store'     => 'modules.store',
+            'show'      => 'modules.show',
+            'update'    => 'modules.update',
+            'destroy'   => 'modules.destroy'
+        ]);
+    });
+
+
     //Route::post('/login', [AuthController::class, 'login']);
     //Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
